@@ -1,3 +1,178 @@
-body {
-    background-color: lightgray;
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Sansita+Swashed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import "~bootstrap/scss/bootstrap";
+
+@mixin navigationBlock() {
+  padding: 0.5rem;
+}
+
+* {
+  font-size: calc(12px + (16 - 12) * ((100vw - 300px) / (1600 - 300)));
+}
+
+.custom-icon {
+  width: 30px;
+}
+
+.badge {
+  margin-bottom: 0.5rem;
+}
+
+#app {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: #4776e6;
+  background: -webkit-linear-gradient(to right, #4776e6, #8e54e9);
+  background: linear-gradient(to right, #4776e6, #8e54e9);
+
+  .navbar {
+    .navbar-toggler {
+      border: none;
+
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+    }
+
+    .navbar-brand {
+      font-size: 1.8rem;
+      color: #FFFFFF;
+
+      svg {
+        color: #FFFFFF;
+        margin: 0 5%;
+        width: 1.5em;
+        height: auto;
+      }
+    }
+    #responsive-navbar-nav {
+      .navbar-nav {
+        a {
+          color: #FFFFFF;
+          svg {
+            color: #FFFFFF;
+          }
+        }
+      }
+    }
+  }
+
+  section {
+    &.navigation {
+      flex: 0 1 auto;
+      @include navigationBlock();
+    }
+
+    &.content {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+
+
+      .pictures {
+        margin: 2rem 0;
+        display: grid;
+        row-gap: 2em;
+        column-gap: 2em;
+        .col {
+          a {
+            text-decoration: none;
+            .card {
+              border: none;
+              border-radius: 0.4rem;
+              cursor: pointer;
+
+              &:hover {
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+              }
+
+              .card-img-top {
+                border-top-left-radius: 0.4rem;
+                border-top-right-radius: 0.4rem;
+              }
+
+              .card-body {
+                padding: .1rem .1rem;
+
+                .card-social {
+                  display: flex;
+                  justify-content: center;
+
+                  .card-social-btn {
+                    padding: 0.375rem 0.75rem;
+                    font-size: 1rem;
+                    display: inline-block;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    cursor: pointer;
+                    vertical-align: middle;
+
+                    &.likes {
+                      color: #dc3545;
+
+                      svg {
+                        color: #dc3545;
+                        margin-right: 0.3rem;
+                      }
+                    }
+
+                    &.comments {
+                      svg {
+                        color: #1b1b1b;
+                        margin-right: 0.3rem;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+      }
+      .picture {
+        .card {
+          border: none;
+          border-radius: 0.4rem;
+          margin: 1rem 0 2rem 0;
+          img.card-img-top {
+            border-top-left-radius: 0.4rem;
+            border-top-right-radius: 0.4rem;
+          }
+          .card-body {
+            .card-text {
+              color: #1b1b1b;
+            }
+          }
+        }
+      }
+    }
+
+    &.footer {
+      flex: 0 1 40px;
+      background-color: white;
+      @include navigationBlock
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .pictures {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  @media screen and (min-width: 577px) and (max-width: 768px) {
+    .pictures {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (min-width: 769px) {
+    .pictures {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
 }

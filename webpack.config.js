@@ -1,4 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
+const dotenv = require("dotenv");
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -20,7 +21,7 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
-    .addEntry('app', './assets/index.js')
+    .addEntry('app', './assets/index.tsx')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -51,12 +52,20 @@ Encore
         config.useBuiltIns = 'usage';
         config.corejs = 3;
     })
+    .configureDefinePlugin(options => {
+        const env = dotenv.config();
 
+        if(env.error) {
+            throw env.error;
+        }
+
+        options['process.env'].BASE_URL_DEV = JSON.stringify(env.parsed.BASE_URL_DEV);
+    })
     // enables Sass/SCSS support
     .enableSassLoader()
 
     // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
+    .enableTypeScriptLoader()
 
     // uncomment if you use React
     .enableReactPreset()
